@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+      - ./ssl/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
+      - ./ssl/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+    restart: always

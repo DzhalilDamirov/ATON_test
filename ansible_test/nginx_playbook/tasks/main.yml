@@ -1,0 +1,28 @@
+---
+# defaults file for nginx_playbook_test
+    - name: Установка nginx
+      apt:
+        name: nginx
+        state: latest
+        update_cache: true
+
+    - name: Копирование конфигурации nginx
+      template:
+        src: nginx_playbook/templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+        mode: '0644'
+      notify:
+        - Перезапуск nginx
+
+    - name: Запуск и включение nginx
+      service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Проверка доступности nginx по порту {{ nginx_port }}
+      wait_for:
+        port: "{{ nginx_port }}"
+        timeout: 10
+        state: started
+        delay: 2

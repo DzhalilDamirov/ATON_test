@@ -1,0 +1,8 @@
+---
+- name: Установка и настройка nginx
+  hosts: nginx
+  become: true
+  
+
+  roles:
+    - { role: nginx_playbook }

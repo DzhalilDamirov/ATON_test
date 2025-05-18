@@ -1,0 +1,5 @@
+---
+# vars file for nginx_playbook_test
+nginx_port: 80
+nginx_server_name: localhost
+nginx_root: /var/www/html
